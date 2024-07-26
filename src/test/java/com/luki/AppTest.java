@@ -52,4 +52,14 @@ public class AppTest {
 		assertTrue(isMsgCleared, "Message should be cleared");
 		PageRegister.textLogin(driver).click();
 	}
+	
+	
+	@Test
+	public void successLogin() throws Exception {
+		PageLogin.inputEmail(driver).sendKeys("luki@gmail.com");
+		PageLogin.inputPassword(driver).sendKeys("qwerty1234");
+		PageLogin.buttonLogin(driver).click();
+		
+		Thread.sleep(5000);
+	}
 }
