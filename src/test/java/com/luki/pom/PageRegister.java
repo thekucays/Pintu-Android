@@ -7,10 +7,6 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 
 public class PageRegister {
-//	public static WebElement textPriceLowToHigh(AndroidDriver driver) {
-//		return driver.findElement(By.xpath("//*[@text='Price (low to high)']"));
-//	}
-	
 	public static WebElement inputName(AndroidDriver driver) {
 		return driver.findElement(By.id("com.loginmodule.learning:id/textInputEditTextName"));
 	}
