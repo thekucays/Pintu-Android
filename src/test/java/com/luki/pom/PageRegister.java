@@ -2,6 +2,8 @@ package com.luki.pom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 
 public class PageRegister {
@@ -27,6 +29,10 @@ public class PageRegister {
 	
 	public static WebElement buttonRegister(AndroidDriver driver) {
 		return driver.findElement(By.id("com.loginmodule.learning:id/appCompatButtonRegister"));
+	}
+	
+	public static WebElement textLogin(AndroidDriver driver) {
+		return driver.findElement(By.id("com.loginmodule.learning:id/appCompatTextViewLoginLink"));
 	}
 
 }

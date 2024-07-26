@@ -29,6 +29,19 @@ public class Common {
 		return result;
 	}
 	
+	public static boolean waitUntilTextDissapear(String text, int loopTimeout, AndroidDriver driver) throws Exception {
+		boolean result = false;
+		for(int i=0; i<loopTimeout; i++) {
+			List<WebElement> elements = driver.findElements(By.xpath("//*[@text='" + text + "']"));
+			if(elements.size() == 0) {
+				result = true;
+				break;
+			}
+			Thread.sleep(1000);
+		}
+		return result;
+	}
+	
 	public static boolean checkElementExistsByAccessibilityID(String accID, AndroidDriver driver) throws Exception {
 		List<WebElement> elements = driver.findElements(AppiumBy.accessibilityId(accID));
 		

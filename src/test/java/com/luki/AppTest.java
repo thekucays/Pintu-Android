@@ -28,10 +28,28 @@ public class AppTest {
 	@Test
 	public void successRegister() throws Exception {
 		PageLogin.textRegister(driver).click();
-	}
-	
-	@Test
-	public void successRegister2() throws Exception {
-		PageLogin.textRegister(driver).click();
+		
+		// registration data 
+		final String registerName = "Luki";
+		final String registerEmail = "luki@gmail.com";
+		final String registerPwd = "qwerty1234";
+		
+		// fill form
+		// tambahin wait for element disini
+		PageRegister.inputName(driver).sendKeys(registerName);
+		PageRegister.inputEmail(driver).sendKeys(registerEmail);
+		PageRegister.inputPassword(driver).sendKeys(registerPwd);
+		PageRegister.inputConfirmPassword(driver).sendKeys(registerPwd);
+		PageRegister.buttonRegister(driver).click();
+		
+		
+		final String successMsg = "Registration Successful";
+		boolean isSuccess = Common.checkElementExistsByText(successMsg, driver);
+		assertTrue(isSuccess, "Registration Success text should exist");
+		
+		
+		boolean isMsgCleared = Common.waitUntilTextDissapear(successMsg, 10, driver);
+		assertTrue(isMsgCleared, "Message should be cleared");
+		PageRegister.textLogin(driver).click();
 	}
 }
