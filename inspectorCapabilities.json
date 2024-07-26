@@ -1,0 +1,7 @@
+{
+  "appium:appium;deviceName": "emulator-5554",
+  "appium:automationName": "UiAutomator2",
+  "appium:app": "/Users/xxx/eclipse-workspace/projectName/apk/apptest.apk",
+  "platformName": "android",
+  "appium:appWaitActivity": "com.swaglabsmobileapp.MainActivity"
+}
