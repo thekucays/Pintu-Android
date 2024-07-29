@@ -28,6 +28,8 @@ public class Common {
 			
 			if(locatorStrategy.equalsIgnoreCase("xpathText")) {
 				elements = driver.findElements(By.xpath("//*[@text='" + text + "']"));
+			} else if(locatorStrategy.equalsIgnoreCase("xpath")) {
+				elements = driver.findElements(By.xpath(text));
 			}
 			
 			if(elements.size() != 0) {
