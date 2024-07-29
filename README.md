@@ -1,5 +1,5 @@
 # Android Tests
-Luki Ramadon - https://github.com/thekucays/flptst-appium
+Luki Ramadon
 
 
 ## IDE / Plugins Used
@@ -30,9 +30,9 @@ Use this capability set (also available in `inspectorCapabilities.json` file, ma
 {
   "appium:appium;deviceName": "emulator-5554",
   "appium:automationName": "UiAutomator2",
-  "appium:app": "/Users/xxx/eclipse-workspace/projectName/apk/apptest.apk",
+  "appium:app": "/<yourDirectory>/APPPintuLuki/apk/sample.apk",
   "platformName": "android",
-  "appium:appWaitActivity": "com.swaglabsmobileapp.MainActivity"
+  "appium:appWaitActivity": "com.loginmodule.learning.activities.LoginActivity"
 }
 ```
 
