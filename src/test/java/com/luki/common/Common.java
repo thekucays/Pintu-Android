@@ -107,7 +107,7 @@ public class Common {
 			PageRegister.inputName(driver).sendKeys(registerName);
 			PageRegister.inputEmail(driver).sendKeys(registerEmail);
 			PageRegister.inputPassword(driver).sendKeys(registerPwd);
-			PageRegister.inputConfirmPassword(driver).sendKeys(registerPwd);
+			PageRegister.inputConfirmPassword(driver).sendKeys(registerConfirmPwd);
 			PageRegister.buttonRegister(driver).click();
 			
 			String warningMessage = "";
