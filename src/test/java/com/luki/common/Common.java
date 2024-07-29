@@ -30,6 +30,10 @@ public class Common {
 				elements = driver.findElements(By.xpath("//*[@text='" + text + "']"));
 			} else if(locatorStrategy.equalsIgnoreCase("xpath")) {
 				elements = driver.findElements(By.xpath(text));
+			} else if(locatorStrategy.equalsIgnoreCase("appiumID")) {
+				elements = driver.findElements(AppiumBy.id(text));
+			} else if(locatorStrategy.equalsIgnoreCase("ID")) {
+				elements = driver.findElements(By.id(text));
 			}
 			
 			if(elements.size() != 0) {
@@ -83,31 +87,48 @@ public class Common {
 		driver.perform(Collections.singletonList(sequence));
 	}
 	
-	public static boolean registerNewUser(String registerName, String registerEmail, String registerPwd, String registerConfirmPwd, AndroidDriver driver) throws Exception {
-		boolean isRegisterSuccess = true;
+	
+	// overloaded method, to accept errMsg parameter when used for registration negative case
+	public static boolean registerNewUser(String registerName, String registerEmail, String registerPwd, String registerConfirmPwd, boolean isSuccessExpected, AndroidDriver driver) throws Exception {
+		boolean processCompleted = registerNewUser(registerName, registerEmail, registerPwd, registerConfirmPwd, isSuccessExpected, "dummy err Message", driver);
+		return processCompleted;
+	}
+
+	
+	public static boolean registerNewUser(String registerName, String registerEmail, String registerPwd, String registerConfirmPwd, boolean isSuccessExpected, String errMsg, AndroidDriver driver) throws Exception {
+		boolean isProcessCompleted = true;
 		
 		try {
 			// fill form
-			// tambahin wait for element disini
+			PageLogin.waitUntilTextRegisterExists(driver);
 			PageLogin.textRegister(driver).click();
+			
+			PageRegister.waitUntilInputNameExists(driver);
 			PageRegister.inputName(driver).sendKeys(registerName);
 			PageRegister.inputEmail(driver).sendKeys(registerEmail);
 			PageRegister.inputPassword(driver).sendKeys(registerPwd);
 			PageRegister.inputConfirmPassword(driver).sendKeys(registerPwd);
 			PageRegister.buttonRegister(driver).click();
 			
+			String warningMessage = "";
 			
-			final String successMsg = "Registration Successful";
-			boolean isSuccess = Common.waitUntilElementShown(successMsg, "xpathText", 10, driver);
-			assertTrue(isSuccess, "Registration Success text should exist");
-			
-			
-			boolean isMsgCleared = Common.waitUntilElementDissapear(successMsg, "xpathText", 10, driver);
-			assertTrue(isMsgCleared, "Message should be cleared");
+			if(isSuccessExpected) {
+				warningMessage = "Registration Successful";
+				boolean isSuccess = Common.waitUntilElementShown(warningMessage, "xpathText", 10, driver);
+				assertTrue(isSuccess, "Registration Success text should exist");
+				
+				boolean isMsgCleared = Common.waitUntilElementDissapear(warningMessage, "xpathText", 10, driver);
+				assertTrue(isMsgCleared, "Message should be cleared");
+			} else {
+				// use errMsg variable here to validate registration error messages
+				warningMessage = errMsg;
+				boolean isRegistrationFailed = Common.waitUntilElementShown(warningMessage, "xpathText", 10, driver);
+				assertTrue(isRegistrationFailed, "Registration should be failed with error message: " + warningMessage);
+			}
 		} catch(Exception e) {
-			isRegisterSuccess  = false;
+			isProcessCompleted  = false;
 		}
 		
-		return isRegisterSuccess;
+		return isProcessCompleted;
 	}
 }
