@@ -28,17 +28,19 @@ public class AppTest {
         }
     }
 	
-//	@Test
-//	public void successRegister() throws Exception {
-//		// registration data 
-//		final String registerName = "Luki";
-//		final String registerEmail = "luki@gmail.com";
-//		final String registerPwd = "qwerty1234";
-//		
-//		Common.registerNewUser(registerName, registerEmail, registerPwd, registerPwd, driver);
-//		
-//		PageRegister.textLogin(driver).click();
-//	}
+	
+	// Success Cases ////////////////////////////
+	@Test
+	public void successRegister() throws Exception {
+		// registration data 
+		final String registerName = "Luki";
+		final String registerEmail = "luki@gmail.com";
+		final String registerPwd = "qwerty1234";
+		
+		Common.registerNewUser(registerName, registerEmail, registerPwd, registerPwd, driver);
+		
+		PageRegister.textLogin(driver).click();
+	}
 	
 	
 	@Test
@@ -63,4 +65,68 @@ public class AppTest {
 		final String shownEmail = PageHome.textLoginEmail(driver).getText();
 		assertEquals(registerEmail, shownEmail, "Login email: " + registerEmail + ", should be shown correctly");
 	}
+	
+	// End of Success Cases ////////////////////////////
+	
+	
+	// Negative Cases - Login ////////////////////////////
+	
+	@Test
+	public void failedLoginEmptyEmail() throws Exception {
+		final String loginPwd = "qwerty1234";
+		final String errMsg = "Enter Valid Email";
+		
+		PageLogin.inputPassword(driver).sendKeys(loginPwd);
+		PageLogin.buttonLogin(driver).click();
+		
+		final boolean validationResult = Common.waitUntilElementShown(errMsg, "xpathText", 5, driver);
+		assertTrue(validationResult, "validation: " + errMsg + ", should be visible");
+		
+	}
+	
+	@Test
+	public void failedLoginEmptyPassword() throws Exception {
+		final String loginEmail = "luki@gmail.com";
+		final String errMsg = "Enter Valid Email";
+//		final String errMsg = "Enter Valid Password";
+		
+		PageLogin.inputEmail(driver).sendKeys(loginEmail);
+		PageLogin.buttonLogin(driver).click();
+		
+		final boolean validationResult = Common.waitUntilElementShown(errMsg, "xpathText", 5, driver);
+		assertTrue(validationResult, "validation: " + errMsg + ", should be visible");
+		
+	}
+	
+	@Test
+	public void failedLoginInvalidEmail() throws Exception {
+		final String loginEmail = "lukiaaa";
+		final String loginPwd = "qwerty1234";
+		final String errMsg = "Enter Valid Email";
+		
+		PageLogin.inputEmail(driver).sendKeys(loginEmail);
+		PageLogin.inputPassword(driver).sendKeys(loginPwd);
+		PageLogin.buttonLogin(driver).click();
+		
+		final boolean validationResult = Common.waitUntilElementShown(errMsg, "xpathText", 5, driver);
+		assertTrue(validationResult, "validation: " + errMsg + ", should be visible");
+		
+	}
+	
+	@Test
+	public void failedLoginInvalidCredential() throws Exception {
+		final String loginEmail = "dummy@foo.com";
+		final String loginPwd = "qwerty1234";
+		final String errMsg = "Wrong Email or Password";
+		
+		PageLogin.inputEmail(driver).sendKeys(loginEmail);
+		PageLogin.inputPassword(driver).sendKeys(loginPwd);
+		PageLogin.buttonLogin(driver).click();
+		
+		final boolean validationResult = Common.waitUntilElementShown(errMsg, "xpathText", 5, driver);
+		assertTrue(validationResult, "validation: " + errMsg + ", should be visible");
+		
+	}
+	
+	// End of Negative Cases - Login ////////////////////////////
 }
