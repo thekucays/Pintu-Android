@@ -27,37 +27,29 @@ public class AppTest {
 	
 	@Test
 	public void successRegister() throws Exception {
-		PageLogin.textRegister(driver).click();
-		
 		// registration data 
 		final String registerName = "Luki";
 		final String registerEmail = "luki@gmail.com";
 		final String registerPwd = "qwerty1234";
 		
-		// fill form
-		// tambahin wait for element disini
-		PageRegister.inputName(driver).sendKeys(registerName);
-		PageRegister.inputEmail(driver).sendKeys(registerEmail);
-		PageRegister.inputPassword(driver).sendKeys(registerPwd);
-		PageRegister.inputConfirmPassword(driver).sendKeys(registerPwd);
-		PageRegister.buttonRegister(driver).click();
+		Common.registerNewUser(registerName, registerEmail, registerPwd, registerPwd, driver);
 		
-		
-		final String successMsg = "Registration Successful";
-		boolean isSuccess = Common.checkElementExistsByText(successMsg, driver);
-		assertTrue(isSuccess, "Registration Success text should exist");
-		
-		
-		boolean isMsgCleared = Common.waitUntilTextDissapear(successMsg, 10, driver);
-		assertTrue(isMsgCleared, "Message should be cleared");
 		PageRegister.textLogin(driver).click();
 	}
 	
 	
 	@Test
 	public void successLogin() throws Exception {
-		PageLogin.inputEmail(driver).sendKeys("luki@gmail.com");
-		PageLogin.inputPassword(driver).sendKeys("qwerty1234");
+		// registration data 
+		final String registerName = "Luki";
+		final String registerEmail = "luki@gmail.com";
+		final String registerPwd = "qwerty1234";
+		
+		Common.registerNewUser(registerName, registerEmail, registerPwd, registerPwd, driver);
+		PageRegister.textLogin(driver).click();
+		
+		PageLogin.inputEmail(driver).sendKeys(registerEmail);
+		PageLogin.inputPassword(driver).sendKeys(registerPwd);
 		PageLogin.buttonLogin(driver).click();
 		
 		Thread.sleep(5000);
