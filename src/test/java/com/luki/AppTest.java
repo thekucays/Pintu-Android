@@ -134,8 +134,8 @@ public class AppTest {
 	
 	// End of Negative Cases - Register ////////////////////////////
 	
-	
-	
+
+	 
 	// Negative Cases - Login ////////////////////////////
 	
 	@Test
@@ -159,20 +159,6 @@ public class AppTest {
 		final String errMsg = "Enter Valid Email";
 		
 		PageLogin.inputPassword(driver).sendKeys(loginPwd);
-		PageLogin.buttonLogin(driver).click();
-		
-		final boolean validationResult = Common.waitUntilElementShown(errMsg, "xpathText", 5, driver);
-		assertTrue(validationResult, "validation: " + errMsg + ", should be visible");
-		
-	}
-	
-	@Test
-	public void failedLoginEmptyPassword() throws Exception {
-		final String loginEmail = "luki@gmail.com";
-		final String errMsg = "Enter Valid Email";
-//		final String errMsg = "Enter Valid Password";
-		
-		PageLogin.inputEmail(driver).sendKeys(loginEmail);
 		PageLogin.buttonLogin(driver).click();
 		
 		final boolean validationResult = Common.waitUntilElementShown(errMsg, "xpathText", 5, driver);
@@ -211,4 +197,62 @@ public class AppTest {
 	}
 	
 	// End of Negative Cases - Login ////////////////////////////
+	
+	
+	// Cases that should be failed during test ////////////////////////////
+	@Test
+	public void failedLoginEmptyPassword() throws Exception {
+		final String loginEmail = "luki@gmail.com";
+		final String errMsg = "Enter Valid Password";
+		
+		PageLogin.inputEmail(driver).sendKeys(loginEmail);
+		PageLogin.buttonLogin(driver).click();
+		
+		final boolean validationResult = Common.waitUntilElementShown(errMsg, "xpathText", 5, driver);
+		assertTrue(validationResult, "validation: " + errMsg + ", should be visible");
+		
+	}
+	
+	@Test
+	public void failedLoginPasswordShort() throws Exception {
+		final String loginEmail = "luki@gmail.com";
+		final String loginPwd = "aa12";
+		final String errMsg = "Enter Valid Password";
+		
+		PageLogin.inputEmail(driver).sendKeys(loginEmail);
+		PageLogin.inputPassword(driver).sendKeys((loginPwd));
+		PageLogin.buttonLogin(driver).click();
+		
+		final boolean validationResult = Common.waitUntilElementShown(errMsg, "xpathText", 5, driver);
+		assertTrue(validationResult, "validation: " + errMsg + ", should be visible");
+		
+	}
+	
+	@Test
+	public void failedLoginPasswordWhitespace() throws Exception {
+		final String loginEmail = "luki@gmail.com";
+		final String loginPwd = "  ";
+		final String errMsg = "Enter Valid Password";
+		
+		PageLogin.inputEmail(driver).sendKeys(loginEmail);
+		PageLogin.inputPassword(driver).sendKeys((loginPwd));
+		PageLogin.buttonLogin(driver).click();
+		
+		final boolean validationResult = Common.waitUntilElementShown(errMsg, "xpathText", 5, driver);
+		assertTrue(validationResult, "validation: " + errMsg + ", should be visible");
+		
+	}
+	
+	@Test
+	public void failedRegisterPasswordShort() throws Exception {
+		// registration data 
+		final String registerName = "Luki";
+		final String registerEmail = "luki@gmail.com";
+		final String registerPwd = "aa12";
+		
+		final String errMsg = "Password and Confirm Password too short";
+		
+		Common.registerNewUser(registerName, registerEmail, registerPwd, registerPwd, false, errMsg, driver);
+	}
+	// End of Cases that should be failed during test ////////////////////////////
 }

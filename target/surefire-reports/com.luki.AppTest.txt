@@ -1,4 +1,53 @@
 -------------------------------------------------------------------------------
 Test set: com.luki.AppTest
 -------------------------------------------------------------------------------
-Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 91.11 s -- in com.luki.AppTest
+Tests run: 4, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 49.31 s <<< FAILURE! -- in com.luki.AppTest
+com.luki.AppTest.failedLoginEmptyPassword -- Time elapsed: 10.65 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: validation: Enter Valid Password, should be visible ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at com.luki.AppTest.failedLoginEmptyPassword(AppTest.java:212)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+com.luki.AppTest.failedLoginPasswordWhitespace -- Time elapsed: 10.85 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: validation: Enter Valid Password, should be visible ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at com.luki.AppTest.failedLoginPasswordWhitespace(AppTest.java:242)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+com.luki.AppTest.failedLoginPasswordShort -- Time elapsed: 10.44 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: validation: Enter Valid Password, should be visible ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at com.luki.AppTest.failedLoginPasswordShort(AppTest.java:227)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+com.luki.AppTest.failedRegisterPasswordShort -- Time elapsed: 17.35 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Registration should be failed with error message: Password and Confirm Password too short ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at com.luki.common.Common.registerNewUser(Common.java:126)
+	at com.luki.AppTest.failedRegisterPasswordShort(AppTest.java:255)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
